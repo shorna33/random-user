@@ -18,7 +18,7 @@ const Home = () => {
 
   const [order, setOrder] = useState("ASC");
 
-  const baseURL = "https://randomuser.me/api/?results=100";
+  const baseURL = "https://randomuser.me/api/?results=5000";
 
   //retrive data from api
   useEffect(() => {
