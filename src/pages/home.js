@@ -67,21 +67,49 @@ const Home = () => {
     currentUsers = [];
   }
 
+  // console.log(searchResult)
   const sorting = (col) => {
     if (order === "ASC") {
-      const sorted = [...users].sort((a, b) =>
+      if (searchResult.length > 0 ) {
+        const sorted = [...searchResult].sort((a, b) =>
+        a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
+      );
+      setSearchResult(sorted);
+      setOrder("DSC");
+      } else {
+        const sorted = [...users].sort((a, b) =>
         a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
       );
       setUsers(sorted);
       setOrder("DSC");
+      }    
     }
+
     if (order === "DSC") {
-      const sorted = [...users].sort((a, b) =>
+      if (searchResult.length > 0 ) {
+        const sorted = [...searchResult].sort((a, b) =>
+        a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+      );
+      setSearchResult(sorted);
+      setOrder("ASC");
+      } else {
+        const sorted = [...users].sort((a, b) =>
         a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
       );
       setUsers(sorted);
       setOrder("ASC");
+      }
+      
+      
     }
+    
+    // if (order === "DSC") {
+    //   const sorted = [...users].sort((a, b) =>
+    //     a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+    //   );
+    //   setUsers(sorted);
+    //   setOrder("ASC");
+    // }
   };
 
   return (
