@@ -5,6 +5,8 @@ import { Pagination } from "@mui/material";
 const Home = () => {
   const [users, setUsers] = useState([]);
 
+  const [order, setOrder] = useState("ASC");
+
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
   const lastIndex = currentPage * recordsPerPage;
@@ -27,25 +29,56 @@ const Home = () => {
     setCurrentPage(value);
   };
 
+  const sorting = (col) => {
+    if (order === "ASC") {
+      const sorted = [...users].sort((a, b) =>
+        col == 'name' ? a[col].title.toLowerCase() > b[col].title.toLowerCase() ? 1 : -1 : (col == 'location' ? a[col].country.toLowerCase() > b[col].country.toLowerCase() ? 1 : -1 : a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1)
+        
+        
+      );
+      setUsers(sorted);
+      setOrder("DSC");
+    }
+    if (order === "DSC") {
+      const sorted = [...users].sort((a, b) =>
+        col == 'name' ? a[col].title.toLowerCase() < b[col].title.toLowerCase() ? 1 : -1 : (col == 'location' ? a[col].country.toLowerCase() < b[col].country.toLowerCase() ? 1 : -1 :  a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1)
+      
+      );
+      setUsers(sorted);
+      setOrder("ASC");
+    }
+  };
+
   return (
     <div className="row justify-content-center">
       <div className="col-lg-8">
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Country</th>
+              <th
+                scope="col"
+                onClick={() => sorting("name")}
+              >
+                Full Name
+              </th>
+              <th scope="col" onClick={() => sorting("gender")}>
+                Gender
+              </th>
+              <th scope="col" onClick={() => sorting("email")}>
+                Email
+              </th>
+              <th scope="col" onClick={() => sorting("phone")}>
+                Phone
+              </th>
+              <th scope="col" onClick={() => sorting("location")}>
+                Country
+              </th>
             </tr>
           </thead>
           {currentUsers.length > 0 ? (
             <tbody>
               {currentUsers.map((user) => (
                 <tr key={user.phone}>
-                  <td>{user.id.value}</td>
                   <td>
                     {user.name.title} {user.name.first} {user.name.last}
                   </td>
@@ -59,7 +92,7 @@ const Home = () => {
           ) : (
             <tbody>
               <tr>
-                <td colSpan="6">No users Found</td>
+                <td colSpan="5">No users Found</td>
               </tr>
             </tbody>
           )}
