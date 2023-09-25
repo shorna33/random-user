@@ -18,7 +18,7 @@ const Home = () => {
 
   const [order, setOrder] = useState("ASC");
 
-  const baseURL = "https://randomuser.me/api/?results=5000";
+  const baseURL = "https://randomuser.me/api/?results=100";
 
   //retrive data from api
   useEffect(() => {
@@ -70,39 +70,37 @@ const Home = () => {
   // console.log(searchResult)
   const sorting = (col) => {
     if (order === "ASC") {
-      if (searchResult.length > 0 ) {
+      if (searchResult.length > 0) {
         const sorted = [...searchResult].sort((a, b) =>
-        a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
-      );
-      setSearchResult(sorted);
-      setOrder("DSC");
+          a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
+        );
+        setSearchResult(sorted);
+        setOrder("DSC");
       } else {
         const sorted = [...users].sort((a, b) =>
-        a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
-      );
-      setUsers(sorted);
-      setOrder("DSC");
-      }    
+          a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
+        );
+        setUsers(sorted);
+        setOrder("DSC");
+      }
     }
 
     if (order === "DSC") {
-      if (searchResult.length > 0 ) {
+      if (searchResult.length > 0) {
         const sorted = [...searchResult].sort((a, b) =>
-        a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
-      );
-      setSearchResult(sorted);
-      setOrder("ASC");
+          a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+        );
+        setSearchResult(sorted);
+        setOrder("ASC");
       } else {
         const sorted = [...users].sort((a, b) =>
-        a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
-      );
-      setUsers(sorted);
-      setOrder("ASC");
+          a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+        );
+        setUsers(sorted);
+        setOrder("ASC");
       }
-      
-      
     }
-    
+
     // if (order === "DSC") {
     //   const sorted = [...users].sort((a, b) =>
     //     a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
@@ -120,19 +118,19 @@ const Home = () => {
           <thead>
             <tr>
               <th scope="col" onClick={() => sorting("name")}>
-                Full Name
+                Full Name <i class="fas fa-arrows-alt-v"></i>
               </th>
               <th scope="col" onClick={() => sorting("gender")}>
-                Gender
+                Gender <i class="fas fa-arrows-alt-v"></i>
               </th>
               <th scope="col" onClick={() => sorting("email")}>
-                Email
+                Email <i class="fas fa-arrows-alt-v"></i>
               </th>
               <th scope="col" onClick={() => sorting("phone")}>
-                Phone
+                Phone <i class="fas fa-arrows-alt-v"></i>
               </th>
               <th scope="col" onClick={() => sorting("location")}>
-                Country
+                Country <i class="fas fa-arrows-alt-v"></i>
               </th>
             </tr>
           </thead>
